@@ -1,3 +1,2 @@
-*.docx
-roadmap.py
-structure.py
+/ignore
+/ignore/*
