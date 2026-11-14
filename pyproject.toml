@@ -1,0 +1,81 @@
+[build-system]
+requires = ["hatchling >= 1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pdfbot"
+version = "0.1.0"
+description = "Split PDFs, translate packs via Google Translate, and archive results with dual-database history."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Your Name", email = "you@example.com" }]
+keywords = ["pdf", "translation", "playwright", "pymupdf", "desktop"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Graphics",
+    "Topic :: Text Processing :: Linguistic",
+]
+
+dependencies = [
+    "PyMuPDF>=1.24.0,<2",
+    "playwright>=1.44.0,<2",
+    "reportlab>=4.0.0,<5",
+    "PySide6>=6.7.0,<7",
+    "SQLAlchemy>=2.0.0,<3",
+    "psycopg[binary]>=3.1.0,<4",
+    "pydantic-settings>=2.1.0,<3",
+    "platformdirs>=4.0.0,<5",
+    "loguru>=0.7.0,<1",
+    "deep-translator>=1.11.0,<2",
+    "python-dotenv>=1.0.0,<2",
+    "alembic>=1.13.0,<2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-qt>=4.4.0",
+    "pytest-cov>=5.0",
+    "ruff>=0.8.0",
+    "pre-commit>=3.7.0",
+]
+
+[project.scripts]
+pdfbot = "pdfbot.__main__:main"
+
+[project.gui-scripts]
+pdfbot-gui = "pdfbot.app:main"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
+ignore = [
+    "E501",  # line length handled by formatter
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = [
+    "S101",  # assert is expected in tests
+    "ARG",   # pytest fixtures may look unused
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = ["tests"]
+pythonpath = ["src"]
+addopts = "-ra --strict-markers --strict-config"
+markers = [
+    "browser: marks tests that require a real browser (skip unless BROWSER_TESTS=1)",
+    "slow: marks tests that take more than 2 seconds",
+]
