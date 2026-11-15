@@ -1,3 +1,122 @@
 /ignore
 /ignore/*
 *.txt
+# ============================================================================
+# .gitignore — pdfbot
+#
+# Rule of thumb: if it is generated (by Python, by a build, by the app itself,
+# or by your IDE), it does not belong in git. Every entry below is either a
+# build artefact, a runtime artefact, a secret, or a local-only file.
+# ============================================================================
+
+# ----------------------------------------------------------------------------
+# Python runtime
+# ----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# ----------------------------------------------------------------------------
+# Virtual environments
+# ----------------------------------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.python-version
+
+# ----------------------------------------------------------------------------
+# Testing & coverage
+# ----------------------------------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+coverage.xml
+htmlcov/
+.tox/
+.nox/
+.hypothesis/
+
+# ----------------------------------------------------------------------------
+# Linting & type checking
+# ----------------------------------------------------------------------------
+.ruff_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyright/
+
+# ----------------------------------------------------------------------------
+# Packaging & distribution
+# ----------------------------------------------------------------------------
+*.spec.bak
+PyInstaller/
+*.manifest
+
+# ----------------------------------------------------------------------------
+# Secrets & local configuration
+# ----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+secrets/
+
+# ----------------------------------------------------------------------------
+# Application runtime data
+# ----------------------------------------------------------------------------
+# These are created by the app in DATA_DIR — but if DATA_DIR is ever pointed
+# at the repo during development, we still do not want them committed.
+packs/
+RawTranslatedMaterial/
+*.db
+*.db-journal
+*.db-wal
+*.db-shm
+history.db
+logs/
+*.log
+data/
+
+# ----------------------------------------------------------------------------
+# Alembic (only if env.py is ever pointed at a local DB inside the repo)
+# ----------------------------------------------------------------------------
+alembic.ini.bak
+
+# ----------------------------------------------------------------------------
+# IDE and editor state
+# ----------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ----------------------------------------------------------------------------
+# OS-level artefacts
+# ----------------------------------------------------------------------------
+.cache/
+.calibre-*/  
+.Trash-*/
