@@ -120,3 +120,4 @@ desktop.ini
 .cache/
 .calibre-*/  
 .Trash-*/
+*.pdf

@@ -51,16 +51,16 @@ class Settings(BaseSettings):
 
     def model_post_init(self, __context) -> None:
         """Resolve dynamic paths after loading from .env."""
-        if self.data_dir is None:
+        if not self.data_dir:  # Changed from 'is None'
             self.data_dir = Path(user_data_dir("pdfbot"))
             
-        if self.log_dir is None:
+        if not self.log_dir:   # Changed from 'is None'
             self.log_dir = self.data_dir / "logs"
             
-        if self.browser_profile_dir is None:
+        if not self.browser_profile_dir: # Changed from 'is None'
             self.browser_profile_dir = self.data_dir / "browser_profile"
             
-        if self.sqlite_url is None:
+        if not self.sqlite_url: # Changed from 'is None'
             self.sqlite_url = f"sqlite:///{self.data_dir}/history.db"
 
         # Ensure directories exist
