@@ -51,21 +51,25 @@ class Settings(BaseSettings):
 
     def model_post_init(self, __context) -> None:
         """Resolve dynamic paths after loading from .env."""
-        if not self.data_dir:  # Changed from 'is None'
+        # Handle data_dir
+        if not self.data_dir or str(self.data_dir) == ".":
             self.data_dir = Path(user_data_dir("pdfbot"))
             
-        if not self.log_dir:   # Changed from 'is None'
+        # Handle log_dir
+        if not self.log_dir or str(self.log_dir) == ".":
             self.log_dir = self.data_dir / "logs"
             
-        if not self.browser_profile_dir: # Changed from 'is None'
+        # Handle browser_profile_dir
+        if not self.browser_profile_dir or str(self.browser_profile_dir) == ".":
             self.browser_profile_dir = self.data_dir / "browser_profile"
             
-        if not self.sqlite_url: # Changed from 'is None'
+        # Handle sqlite_url
+        if not self.sqlite_url:
             self.sqlite_url = f"sqlite:///{self.data_dir}/history.db"
 
         # Ensure directories exist
         self.data_dir.mkdir(parents=True, exist_ok=True)
         self.log_dir.mkdir(parents=True, exist_ok=True)
-
+        self.browser_profile_dir.mkdir(parents=True, exist_ok=True)
 # Global instance for the app to import
 settings = Settings()

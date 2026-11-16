@@ -47,3 +47,15 @@ class PdfBackend:
         except Exception as e:
             logger.error(f"Failed to split PDF {pdf_path} at pages {start_page}-{end_page}: {e}")
             raise SplitError(f"Failed to split PDF: {e}") from e
+    @staticmethod
+    def extract_text(pdf_path: Path) -> str:
+        """Extracts all text from a PDF as a single string."""
+        try:
+            with pymupdf.open(pdf_path) as doc:
+                text = ""
+                for page in doc:
+                    text += page.get_text("text") + "\n\n"
+                return text.strip()
+        except Exception as e:
+            logger.error(f"Failed to extract text from {pdf_path}: {e}")
+            raise SplitError(f"Could not extract text: {e}") from e
